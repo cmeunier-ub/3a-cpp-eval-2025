@@ -113,7 +113,7 @@ A chaque étape, l'état de chaque buffer doit être affiché.
 
 + Créez votre dépôt GitHub comme indiqué dans les consignes.
 
-> [!WARNING]Attention
+> [!IMPORTANT]
 > **Pensez bien à réaliser un commit à chaque question**
 
 ### 2.1 Programme de test
