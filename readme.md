@@ -194,3 +194,69 @@ Chaque bouteille cassée ajoute une unité de verre au buffer d'entrée de la ma
 Bien que ce soit un peu tard, mieux vaut tard que jamais...
 
 + Vérifiez que votre code est bien structuré et qu'il n'y a pas de redondance, que les variables et méthodes sont biens nomméees. Dans le cas contraire, apportez les améliorations nécessaires.
+
+## Annexes
+
+### Annexe 1 - Gestion des exceptions
+
+#### A1.1. Lancer une exception : throw
+
+Une exception est levée avec l’instruction throw suivie d’une valeur ou d’un objet :
+
+```c++
+throw 42;  // Lance un entier
+throw std::exception("Une erreur s'est produite"); // Lance un objet d'exception
+```
+
+#### A.1.2. Capturer une exception : try et catch
+
+Les blocs try et catch permettent de capturer et de traiter les exceptions levées.
+
+Structure de base :
+
+```c++
+try {
+    // Code pouvant lancer une exception
+} catch (const std::exception& e) {
+    // Traitement de l’exception
+}
+```
+
+Plusieurs blocs catch peuvent être chaînés pour traiter différents types d’exceptions :
+
+```c++
+try {
+    // Code risqué
+} catch (int e) {
+    std::cout << "Exception int : " << e << std::endl;
+} catch (const std::exception& e) {
+    std::cout << "Exception std : " << e.what() << std::endl;
+}
+```
+
+#### A.1.3. Exceptions personnalisées
+
+Il est possible de définir ses propres exceptions en dérivant de std::exception :
+
+```c++
+class MyException : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Mon exception personnalisée";
+    }
+};
+
+throw MyException();
+```
+
+#### A.1.4. Bonnes pratiques
+
+Toujours capturer par référence constante pour éviter les copies inutiles : 
+
+```c++
+catch (const std::exception& e)
+```
+
+Fournir des messages d’erreur explicites pour faciliter le débogage.
+
+**Ne jamais lancer d’exception dans un destructeur**
