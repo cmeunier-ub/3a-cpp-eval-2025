@@ -5,11 +5,15 @@ Les documents, l'accès à Internet et l'usage des postes personnels est autoris
 
 **La lecture intégrale du sujet est nécessaire avant de commencer à développer.**
 
-Il est important que vous travailliez en suivant une logique incrémentale. **N'essayez pas de TOUT faire directement.**
+> [!IMPORTANT]
+> Il est important que vous travailliez en suivant une logique incrémentale. **N'essayez pas de TOUT faire directement.**
 
 Le résultat attendu doit être placé dans un dépôt github **privé** nommé `polytech-dijon-3a-cpp`. Vous ajouterez en collaborateurs Monsieur Chassel (`esirem-chassel`) et Monsieur Meunier (`cmeunier-ub`).
 
-Un makefile ou un cmakelist doit être présent, valide et configuré pour générer l'exécutable final (nommé `productionline`) dans un dossier nommé `final`. **Le versionning des binaires n'est pas souhaité**.
+Un makefile ou un cmakelist doit être présent, valide et configuré pour générer l'exécutable final (nommé `productionline`) dans un dossier nommé `final`. 
+
+> [!WARNING]
+> **Le versionning des binaires n'est pas souhaité**.
 
 ## Notions évaluées
 
@@ -168,7 +172,7 @@ Il est possible qu'un buffer d'entrée soit vide et ne puisse pas fournir une ma
 
 ### 2.10 Classe MachinePrepareShipping
 
-+ Creéez la classe `MachinePrepareShipping` qui prend un nombre aléatoire (N) de bouteilles fermées (f) et les place dans un fichier nommé de manière incrémentale ("colis-1.txt" pour le premier, "colis-2.txt" pour le second, ...). La valeur de N est regénérée à chaque nouveau colis. La machine peut empaqueter deux bouteilles par tick. Le fichier est créé lorsque toutes les bouteilles nécessaires ont été récupérées dans le buffer d'entrée.
++ Creéez la classe `MachinePrepareShipping` qui prend un nombre aléatoire (N) de bouteilles fermées (f) et les place dans un [fichier](#annexe-2---fichiers-texte) nommé de manière incrémentale ("colis-1.txt" pour le premier, "colis-2.txt" pour le second, ...). La valeur de N est regénérée à chaque nouveau colis. La machine peut empaqueter deux bouteilles par tick. Le fichier est créé lorsque toutes les bouteilles nécessaires ont été récupérées dans le buffer d'entrée.
 + Testez le bon fonctionnement de cette machine.
 + Couplez cette machine à votre chaine de production.
 
@@ -201,7 +205,7 @@ Bien que ce soit un peu tard, mieux vaut tard que jamais...
 
 #### A1.1. Lancer une exception : throw
 
-Une exception est levée avec l’instruction throw suivie d’une valeur ou d’un objet :
+Une exception est levée avec l’instruction `throw` suivie d’une valeur ou d’un objet :
 
 ```c++
 throw 42;  // Lance un entier
@@ -210,33 +214,39 @@ throw std::exception("Une erreur s'est produite"); // Lance un objet d'exception
 
 #### A.1.2. Capturer une exception : try et catch
 
-Les blocs try et catch permettent de capturer et de traiter les exceptions levées.
-
-Structure de base :
+Les blocs `try` et `catch` permettent de capturer et de traiter les exceptions levées.
 
 ```c++
-try {
-    // Code pouvant lancer une exception
-} catch (const std::exception& e) {
+try 
+{
+    // Code susceptible de lever une exception
+}
+catch (const std::exception& exception) 
+{
     // Traitement de l’exception
 }
 ```
 
-Plusieurs blocs catch peuvent être chaînés pour traiter différents types d’exceptions :
+Plusieurs blocs `catch` peuvent être chaînés pour traiter différents types d’exceptions :
 
 ```c++
-try {
-    // Code risqué
-} catch (int e) {
+try 
+{
+    // Code susceptible de lever une exception
+} 
+catch (int exception) 
+{
     std::cout << "Exception int : " << e << std::endl;
-} catch (const std::exception& e) {
+} 
+catch (const std::exception& exception) 
+{
     std::cout << "Exception std : " << e.what() << std::endl;
 }
 ```
 
 #### A.1.3. Exceptions personnalisées
 
-Il est possible de définir ses propres exceptions en dérivant de std::exception :
+Il est possible de définir ses propres exceptions en dérivant de `std::exception` :
 
 ```c++
 class MyException : public std::exception {
@@ -249,14 +259,52 @@ public:
 throw MyException();
 ```
 
-#### A.1.4. Bonnes pratiques
+### Annexe 2 - Fichiers texte
 
-Toujours capturer par référence constante pour éviter les copies inutiles : 
+La manipulation des fichiers texte en C++ est réalisée à l’aide de la bibliothèque standard `fstream`. 
+
+#### A.2.1. Inclure la bibliothèque appropriée
+
+Pour travailler avec des fichiers, incluez la bibliothèque `fstream` :
 
 ```c++
-catch (const std::exception& e)
+#include <fstream>
 ```
 
-Fournir des messages d’erreur explicites pour faciliter le débogage.
+#### A.2.2. Création et ouverture d'un fichier
 
-**Ne jamais lancer d’exception dans un destructeur**
+La classe `std::ofstream` permet d’écrire dans des fichiers :
+
+```c++
+std::ofstream fichier("exemple.txt");
+if (!fichier) 
+{
+    // La fichier n'a pas pu être overt
+}
+```
+
+#### A.2.3. Écriture dans le fichier
+
+Utilisez l’opérateur `<<` pour écrire des données dans un fichier :
+
+```c++
+fichier << "Une nouvelle ligne dans le fichier !" << std::endl;
+```
+
+#### A.2.4. Fermeture du fichier
+
+Il est important de fermer le fichier une fois l’écriture terminée pour s’assurer que toutes les données sont correctement enregistrées :
+
+```c++
+fichier.close();
+```
+
+Note : Le destructeur de `std::ofstream` ferme automatiquement le fichier si vous oubliez de le faire explicitement.
+
+
+#### A.2.5. Bonnes pratiques
+
++ Toujours vérifier si le fichier s’est ouvert correctement avant de l’utiliser.
+
++ Utiliser le mode `std::ios::app` pour ne pas écraser accidentellement des données existantes.
+
