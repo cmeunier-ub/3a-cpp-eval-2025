@@ -282,6 +282,8 @@ if (!fichier)
     // La fichier n'a pas pu être overt
 }
 ```
+> [!IMPORTANT]
+> **Toujours vérifier que le fichier est bien ouvert avant d'écrire dedans.**
 
 #### A.2.3. Écriture dans le fichier
 
@@ -300,11 +302,3 @@ fichier.close();
 ```
 
 Note : Le destructeur de `std::ofstream` ferme automatiquement le fichier si vous oubliez de le faire explicitement.
-
-
-#### A.2.5. Bonnes pratiques
-
-+ Toujours vérifier si le fichier s’est ouvert correctement avant de l’utiliser.
-
-+ Utiliser le mode `std::ios::app` pour ne pas écraser accidentellement des données existantes.
-
