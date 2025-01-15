@@ -157,7 +157,7 @@ Comme vu au paragraphe [1.1](#11-machines), une instance de `Machine` possède u
 Il est possible qu'un buffer d'entrée soit vide et ne puisse pas fournir une machine en matière première. De la même façon, il est possible qu'un buffer de srotie soit plein et ne puisse pas réceptionner la production d'une machine.
 
 + Prenez en compte ses problématiques dans les machines précédentes.
-+ Levez une exception lorsque ce type de problèmes survient.
++ Levez une [exception](#annexe-1---gestion-des-exceptions) lorsque ce type de problèmes survient.
 + Capturez l'exception dans le programme de test de la chaine de production afin d'afficher le problème à l'utilisateur.
 
 ### 2.9 Classe MachineMakeEncapsulation
