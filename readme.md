@@ -155,7 +155,7 @@ Comme vu au paragraphe [1.1](#11-machines), une instance de `Machine` possède u
 
 ### 2.7 Première interconnexion
 + Créez une chaine de production rassemblant les trois machines précédemment créées et testez le fonctionnement global de la chaine.
-+ Le programme affichera l'état des buffer à chaque étape.
++ Le programme affichera l'état des buffers à chaque étape.
   
 ### 2.8 Problèmes de buffer
 Il est possible qu'un buffer d'entrée soit vide et ne puisse pas fournir une machine en matière première. De la même façon, il est possible qu'un buffer de srotie soit plein et ne puisse pas réceptionner la production d'une machine.
