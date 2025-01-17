@@ -150,7 +150,7 @@ Comme vu au paragraphe [1.1](#11-machines), une instance de `Machine` possède u
   
 ### 2.6 Classe MachineFillBottle
 
-+ Créez la classe `MachineFillSoda` qui prend une bouteille (b) et une unité de soda (s) pour fournir une bouteille remplie (r) à chaque tick.
++ Créez la classe `MachineFillBottle` qui prend une bouteille (b) et une unité de soda (s) pour fournir une bouteille remplie (r) à chaque tick.
 + Testez le bon fonctionnement de cette machine
 
 ### 2.7 Première interconnexion
